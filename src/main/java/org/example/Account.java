@@ -21,8 +21,8 @@ public class Account {
         this.uuid = theBank.getNewAccountUUID();
         this.transactions = new ArrayList<Transaction>();
 
-        holder.addAccount( this);
-        theBank.addAccount(this);
+//        holder.addAccount( this);
+//        theBank.addAccount(this);
     }
 
     public String getUUID() {
@@ -58,6 +58,15 @@ public class Account {
         System.out.println();
     }
 
+
+    /**
+     * Add a new transaction in this account
+     * @param amount the amount transacted
+     */
+    public void addTransaction(double amount) {
+        Transaction newTrans = new Transaction(amount, this);
+        this.transactions.add(newTrans);
+    }
     public void addTransaction(double amount, String memo) {
         Transaction newTrans = new Transaction(amount, memo, this);
         this.transactions.add(newTrans);

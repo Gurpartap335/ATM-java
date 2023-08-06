@@ -7,7 +7,7 @@ public class ATM {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
 
-        Bank theBank = new Bank("Indian Bank");
+        Bank theBank = new Bank("Donda Bank");
 
         // add a user, which also creates a savings account
         User user = theBank.addUser("travis", "scott", "2353");
@@ -35,15 +35,15 @@ public class ATM {
 
         do {
             System.out.printf("Welcome to %s%n", theBank.getName());
-            System.out.println("Enter user ID : ");
+            System.out.print("Enter user ID : ");
             userID = s.nextLine();
-            System.out.println("Enter pin: ");
+            System.out.print("Enter pin : ");
             pin = s.nextLine();
 
             authUser = theBank.userLogIn(userID, pin);
             if (authUser == null) {
-                System.out.println("Incorrect user ID/pin combination " + "Please try again.");
-
+                System.out.println("Incorrect user ID/pin combination " +
+                        "Please try again.");
             }
         } while (authUser == null);
 
@@ -54,7 +54,7 @@ public class ATM {
 
     public static void printUserMenu(User theUser, Scanner s) {
         theUser.printAccountSummary();
-        int choice = 0;
+        int choice;
 
         do {
             System.out.printf("Welcome %s, what would you like to do?%n", theUser.getFirstName());

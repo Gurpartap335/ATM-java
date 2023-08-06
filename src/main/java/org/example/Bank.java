@@ -32,8 +32,7 @@ public class Bank {
             }
 
             nonUnique = false;
-            for (User u :
-                    this.users) {
+            for (User u : this.users) {
                 if (uuid.compareTo(u.getUUID()) == 0) {
                     nonUnique = true;
                     break;
