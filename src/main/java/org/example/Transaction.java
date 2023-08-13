@@ -10,12 +10,13 @@ public class Transaction {
 
     private String memo;
 
-    public double getAmount() {
-        return this.amount;
-    }
 
     // the account in which the transaction was performed.
     private Account inAccount;
+
+    public double getAmount() {
+        return this.amount;
+    }
 
 
     public Transaction(double amount, Account inAccount) {

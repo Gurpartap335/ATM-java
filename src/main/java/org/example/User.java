@@ -12,14 +12,13 @@ public class User {
     private String lastName;
 
     // ID number of the user
-    // Universally Unique Identifier
-    private String uuid;
+    private final String uuid;
 
     // The MD5 hash of the user's pin
-    private byte pinHash[];
+    private byte[] pinHash;
 
     // The list of accounts for this user
-    private ArrayList<Account> accounts;
+    private final ArrayList<Account> accounts;
 
     public User(String firstName, String lastName, String pin, Bank theBank) {
         this.firstName = firstName;
@@ -27,7 +26,7 @@ public class User {
 
         // store the pin's MD5 hash, rather than the original value for security reasons
         try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
             pinHash = md.digest(pin.getBytes());
         } catch (NoSuchAlgorithmException e) {
             System.out.println("Error, caught NoSuchAlgorithmException");
@@ -41,7 +40,6 @@ public class User {
 
         // print log message
         System.out.printf("New user %s, %s with ID %s created.%n" , lastName, firstName, uuid);
-        
 
     }
 

@@ -1,5 +1,6 @@
 package org.example;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -19,17 +20,19 @@ public class Bank {
 
 
     public String getNewUserUUID() {
+        StringBuilder sb = new StringBuilder();
         String uuid;
-        Random random = new Random();
-        int len = 6;
+        SecureRandom random = new SecureRandom();
+        int len = 12;
         boolean nonUnique;
 
         // continue looping until we get a unique ID
         do {
-            uuid = "";
             for (int i = 0; i < len; i++) {
-                uuid += ((Integer) random.nextInt(10)).toString();
+                sb.append(random.nextInt(11));
             }
+
+            uuid = sb.toString();
 
             nonUnique = false;
             for (User u : this.users) {
