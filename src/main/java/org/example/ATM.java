@@ -7,10 +7,12 @@ public class ATM {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
 
-        Bank theBank = new Bank("Donda Bank");
+        Bank theBank = new Bank("Utopia Bank");
 
         // add a user, which also creates a savings account
-        User user = theBank.addUser("travis", "scott", "2353");
+        System.out.println("Enter your pin number : ");
+        String pin = s.next();
+        User user = theBank.addUser("travis", "scott", pin);
 
         Account newAccount = new Account("Checking", user, theBank);
         user.addAccount(newAccount);

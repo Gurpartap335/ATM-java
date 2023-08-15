@@ -4,15 +4,15 @@ import java.util.Date;
 
 public class Transaction {
 
-    private double amount;
+    private final double amount;
 
-    private Date timeStamp;
+    private final Date timeStamp;
 
     private String memo;
 
 
     // the account in which the transaction was performed.
-    private Account inAccount;
+    private final Account inAccount;
 
     public double getAmount() {
         return this.amount;

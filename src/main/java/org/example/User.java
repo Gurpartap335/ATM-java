@@ -7,9 +7,9 @@ import java.util.UUID;
 
 public class User {
 
-    private String firstName;
+    private final String firstName;
 
-    private String lastName;
+    private final String lastName;
 
     // ID number of the user
     private final String uuid;
@@ -62,7 +62,7 @@ public class User {
      */
     public boolean validatePin(String aPin) {
         try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
             return MessageDigest.isEqual(md.digest(aPin.getBytes()), this.pinHash);
         } catch(NoSuchAlgorithmException e){
             System.out.println("error, caught NoSuchAlgorithmException");

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class Account {
 
-    private String name;
+    private final String name;
 
-    private String uuid;
+    private final String uuid;
 
     // The User object that own this account
     private User holder;

@@ -6,11 +6,11 @@ import java.util.Random;
 
 public class Bank {
 
-    private String name;
+    private final String name;
 
-    private ArrayList<User> users;
+    private final ArrayList<User> users;
 
-    private ArrayList<Account> accounts;
+    private final ArrayList<Account> accounts;
 
     public Bank(String name) {
         this.name = name;
@@ -23,13 +23,13 @@ public class Bank {
         StringBuilder sb = new StringBuilder();
         String uuid;
         SecureRandom random = new SecureRandom();
-        int len = 12;
+        int len = 9;
         boolean nonUnique;
 
         // continue looping until we get a unique ID
         do {
             for (int i = 0; i < len; i++) {
-                sb.append(random.nextInt(11));
+                sb.append(random.nextInt(10));
             }
 
             uuid = sb.toString();
@@ -47,16 +47,17 @@ public class Bank {
 
 
     public String getNewAccountUUID() {
+        StringBuilder sb = new StringBuilder();
         String uuid;
         Random random = new Random();
-        int len = 10;
+        int len = 9;
         boolean nonUnique;
 
         do {
-            uuid = "";
             for (int i = 0; i < len; i++) {
-                uuid += ((Integer) random.nextInt(10)).toString();
+                sb.append(random.nextInt(10));
             }
+            uuid = sb.toString();
 
             nonUnique = false;
             for (Account a : accounts) {
