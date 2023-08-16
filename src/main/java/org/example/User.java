@@ -3,8 +3,6 @@ package org.example;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.UUID;
-
 public class User {
 
     private final String firstName;

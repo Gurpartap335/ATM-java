@@ -23,7 +23,7 @@ public class Bank {
         StringBuilder sb = new StringBuilder();
         String uuid;
         SecureRandom random = new SecureRandom();
-        int len = 9;
+        int len = 8;
         boolean nonUnique;
 
         // continue looping until we get a unique ID
@@ -50,7 +50,7 @@ public class Bank {
         StringBuilder sb = new StringBuilder();
         String uuid;
         Random random = new Random();
-        int len = 9;
+        int len = 12;
         boolean nonUnique;
 
         do {

@@ -9,10 +9,15 @@ public class ATM {
 
         Bank theBank = new Bank("Utopia Bank");
 
-        // add a user, which also creates a savings account
-        System.out.println("Enter your pin number : ");
+        System.out.print("Enter your First name: ");
+        String firstName = s.next();
+
+        System.out.print("Enter your Second name: ");
+        String lastName = s.next();
+
+        System.out.print("Enter your pin number: ");
         String pin = s.next();
-        User user = theBank.addUser("travis", "scott", pin);
+        User user = theBank.addUser(firstName, lastName, pin);
 
         Account newAccount = new Account("Checking", user, theBank);
         user.addAccount(newAccount);
@@ -29,7 +34,7 @@ public class ATM {
         }
     }
 
-    // there is no data in class, so we can use static method
+
     public static User mainMenuPrompt(Bank theBank, Scanner s) {
         String userID;
         String pin;
@@ -38,9 +43,9 @@ public class ATM {
         do {
             System.out.printf("Welcome to %s%n", theBank.getName());
             System.out.print("Enter user ID : ");
-            userID = s.nextLine();
+            userID = s.next();
             System.out.print("Enter pin : ");
-            pin = s.nextLine();
+            pin = s.next();
 
             authUser = theBank.userLogIn(userID, pin);
             if (authUser == null) {
@@ -60,12 +65,11 @@ public class ATM {
 
         do {
             System.out.printf("Welcome %s, what would you like to do?%n", theUser.getFirstName());
-            System.out.println();
-            System.out.println(" 1 Show account transaction history");
-            System.out.println(" 2 Withdrawal");
-            System.out.println(" 3 Deposit");
-            System.out.println(" 4 Transfer");
-            System.out.println(" 5 Quit");
+            System.out.println("1. Show account transaction history");
+            System.out.println("2. Withdrawal");
+            System.out.println("3. Deposit");
+            System.out.println("4. Transfer");
+            System.out.println("5. Quit");
 
             System.out.println();
             System.out.println("Enter choice: ");
@@ -110,7 +114,7 @@ public class ATM {
 
         // get whose account transaction history to look at
         do {
-            System.out.printf("Enter the number (1-%d) of the account\n" +
+            System.out.printf("Enter the number (1 - %d) of the account" +
                     " whose transactions you want to see",
                     theUser.numAccount());
             theAcct = sc.nextInt() - 1;
@@ -126,7 +130,7 @@ public class ATM {
 
         // get the account to transfer from
         do {
-            System.out.printf("Enter the number (1-%d) of the account%n" +
+            System.out.printf("Enter the number (1 - %d) of the account " +
                     "to transfer from: ", theUser.numAccount());
             fromAcct = s.nextInt()-1;
             if (fromAcct < 0 || fromAcct >= theUser.numAccount()) {
@@ -138,7 +142,7 @@ public class ATM {
 
         // get the account to transfer to
         do {
-            System.out.printf("Enter the number (1-%d) of the account%n" +
+            System.out.printf("Enter the number (1 - %d) of the account" +
                     "to transfer to: ", theUser.numAccount());
             toAcct = s.nextInt()-1;
             if (toAcct < 0 || toAcct >= theUser.numAccount()) {
@@ -177,36 +181,44 @@ public class ATM {
         double accountBalance;
         String memo;
 
-
         // get the account to transfer from
         do {
-            System.out.printf("Enter the number (1-%d) of the account%n" +
+            System.out.printf("Enter the number (1 - %d) of the account " +
                     "to withdraw from: ", theUser.numAccount());
-            fromAcct = s.nextInt()-1;
+            fromAcct = s.nextInt() - 1;
             if (fromAcct < 0 || fromAcct >= theUser.numAccount()) {
                 System.out.println("Invalid account. Please try again.");
             }
         } while (fromAcct < 0 || fromAcct >= theUser.numAccount());
         accountBalance = theUser.getAccountBalance(fromAcct);
 
+        if (accountBalance == 0) {
+            System.out.printf("Sorry, your withdrawal request can't be processed at the moment.%n" +
+                    "Your account balance is currently zero, which means there are no available" +
+                    " funds for withdrawal. %n" +
+                    "If you believe this is incorrect please contact our customer support.%n" +
+                    "Thank You %n");
+            return;
+        }
 
         // get the amount to transfer
         do {
             System.out.printf("Enter the amount to transfer (max $%.02f): $",
                     accountBalance);
             amount = s.nextDouble();
-            if (amount < 0) {
+
+            if (amount <= 0) {
                 System.out.println("Amount must be greater than zero");
             } else if (amount > accountBalance) {
-                System.out.printf("Account must not be greater than%n" +
-                        "balance of $%.02f %n", accountBalance);
+                System.out.printf("Account must not be greater than" +
+                        " balance of $%.02f %n", accountBalance);
             }
         } while (amount < 0 || amount > accountBalance);
 
         // gobble up rest of previous input
         s.nextLine();
 
-        System.out.println("Enter a memo: ");
+        System.out.print("Enter a memo: ");
         memo = s.nextLine();
 
         theUser.addAccountTransaction(fromAcct, -1*amount, memo);
@@ -221,7 +233,7 @@ public class ATM {
 
         // get the account to transfer from
         do {
-            System.out.printf("Enter the number (1-%d) of the account%n" +
+            System.out.printf("Enter the number (1 - %d) of the account " +
                     "to deposit in ", theUser.numAccount());
             toAcct = s.nextInt()-1;
             if (toAcct < 0 || toAcct >= theUser.numAccount()) {
@@ -244,7 +256,7 @@ public class ATM {
         // gobble up rest of previous input
         s.nextLine();
 
-        System.out.println("Enter a memo: ");
+        System.out.print("Enter a memo: ");
         memo = s.nextLine();
 
         theUser.addAccountTransaction(toAcct, amount, memo);
@@ -252,9 +264,4 @@ public class ATM {
 
 
 
-
-
 }
-
-// can we have only one scanner in class?
-// you can not have more than one scanner reading thought system.in

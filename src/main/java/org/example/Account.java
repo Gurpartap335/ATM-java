@@ -50,7 +50,7 @@ public class Account {
 
 
     public void printTransactionHistory() {
-        System.out.printf("%n Transaction History for account %s%n", this.uuid);
+        System.out.printf("%nTransaction History for account %s%n", this.uuid);
 
         for (int i = this.transactions.size() - 1; i >= 0 ; i--) {
             System.out.println(this.transactions.get(i).getSummaryLine());
