@@ -115,7 +115,7 @@ public class ATM {
         // get whose account transaction history to look at
         do {
             System.out.printf("Enter the number (1 - %d) of the account" +
-                    " whose transactions you want to see",
+                    " whose transactions you want to see: ",
                     theUser.numAccount());
             theAcct = sc.nextInt() - 1;
         } while (theAcct < 0 || theAcct >= theUser.numAccount());
@@ -132,7 +132,7 @@ public class ATM {
         do {
             System.out.printf("Enter the number (1 - %d) of the account " +
                     "to transfer from: ", theUser.numAccount());
-            fromAcct = s.nextInt()-1;
+            fromAcct = s.nextInt() - 1;
             if (fromAcct < 0 || fromAcct >= theUser.numAccount()) {
                 System.out.println("Invalid account. Please try again.");
             }
@@ -149,7 +149,6 @@ public class ATM {
                 System.out.println("Invalid account. Please try again.");
             }
         } while (toAcct < 0 || toAcct >= theUser.numAccount());
-        accountBalance = theUser.getAccountBalance(fromAcct);
 
 
         // get the amount to transfer
@@ -170,7 +169,7 @@ public class ATM {
         theUser.addAccountTransaction(fromAcct, -1*amount, String.format(
                 "Transfer to account %s", theUser.getUUID()));
 
-        theUser.addAccountTransaction(toAcct, -1*amount, String.format(
+        theUser.addAccountTransaction(toAcct, amount, String.format(
                 "Transfer to account %s", theUser.getUUID()));
     }
 
@@ -261,7 +260,6 @@ public class ATM {
 
         theUser.addAccountTransaction(toAcct, amount, memo);
     }
-
 
 
 }

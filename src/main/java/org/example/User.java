@@ -95,6 +95,3 @@ public class User {
     }
 
 }
-
-
-// Is it necessary to use this operator in the constructor?
